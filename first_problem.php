@@ -1,13 +1,14 @@
 <?php
 function totalEquelCheck( $array ){
     $totalSum = array_sum( $array );
-
     if( $totalSum%2 !=0 ){
         return false;
     }
+    $sortedArray = $array;
+    sort($sortedArray);
     $targetSum = $totalSum/2;
-    $currentSum = 0;
-    for($i=0; $i<count($array); $i++){
+    for($i=0; $i<count( $array ); $i++){
+        $currentSum = 0;
         foreach( $array as $num ){
             if( $currentSum+$num == $targetSum ){
                 return true;
@@ -17,11 +18,17 @@ function totalEquelCheck( $array ){
             }
         }
 
+        for($j=0; $j<count( $array ); $j++){
+            if($sortedArray[$j]+$sortedArray[$i] == $targetSum){
+                return true;
+            }
+        }
+
     }
     return false;
 }
 
-$array = array(1, 5, 5, 11);
+$array = array(15, 5, 2, 5, 6, 3);
 
 $result = totalEquelCheck($array);
 if($result){
